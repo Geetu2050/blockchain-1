@@ -5,23 +5,23 @@ module geetu_addr::NFTLottery {
     use aptos_framework::timestamp;
     use std::vector;
 
-    /// Struct representing an NFT lottery system
+   
     struct Lottery has store, key {
-        participants: vector<address>,    // List of participants
-        ticket_price: u64,               // Price per lottery ticket
-        total_pool: u64,                 // Total funds collected
-        nft_collection: vector<u64>,     // Available NFT IDs
-        is_active: bool,                 // Lottery status
-        owner: address,                  // Lottery owner
+        participants: vector<address>,    
+        ticket_price: u64,              
+        total_pool: u64,                 
+        nft_collection: vector<u64>,     
+        is_active: bool,                 
+        owner: address,                 
     }
 
-    /// Error codes
+  
     const E_LOTTERY_NOT_ACTIVE: u64 = 1;
     const E_INSUFFICIENT_PAYMENT: u64 = 2;
     const E_NO_PARTICIPANTS: u64 = 3;
     const E_NOT_OWNER: u64 = 4;
 
-    /// Function to create a new NFT lottery
+   
     public fun create_lottery(
         owner: &signer, 
         ticket_price: u64, 
@@ -39,7 +39,7 @@ module geetu_addr::NFTLottery {
         move_to(owner, lottery);
     }
 
-    /// Function for users to buy lottery tickets
+    
     public fun buy_ticket(
         participant: &signer, 
         lottery_owner: address
@@ -54,4 +54,5 @@ module geetu_addr::NFTLottery {
         vector::push_back(&mut lottery.participants, participant_addr);
         lottery.total_pool = lottery.total_pool + lottery.ticket_price;
     }
+
 }
